@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration</title>
+
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        /* Universal Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 15px;
+        }
+
+        /* Main Form Card */
+        .main {
+            width: 100%;
+            max-width: 600px;
+
+            background: white;
+
+            padding: 35px;
+            border-radius: 20px;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+
+            transition: 0.3s ease;
+        }
+
+        /* Heading */
+        h2 {
+            text-align: center;
+
+            color: #4338ca;
+            font-size: 25px;
+            font-weight: 700;
+
+            margin-bottom: 30px;
+        }
+
+        /* Form Layout */
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 20px;
+        }
+
+        /* Form Groups */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Labels */
+        label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        /* Inputs and Select */
+        input,
+        select {
+            width: 100%;
+
+            padding: 13px 15px;
+
+            border: 1.5px solid #d1d5db;
+            border-radius: 10px;
+
+            font-size: 14px;
+            font-family: inherit;
+
+            background: #f9fafb;
+            color: #1e293b;
+
+            outline: none;
+
+            transition: all 0.3s ease;
+        }
+
+        /* Placeholder */
+        input::placeholder {
+            color: #9ca3af;
+        }
+
+        /* Focus Effect */
+        input:focus,
+        select:focus {
+            border-color: #6366f1;
+            background: white;
+
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+
+        /* Full Width Fields */
+        .full-width {
+            grid-column: span 2;
+        }
+
+        /* Submit Button */
+        button {
+            grid-column: span 2;
+
+            width: 100%;
+
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+
+            border: none;
+            padding: 15px;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+
+            transition: all 0.3s ease;
+
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
+        }
+
+        /* Button Hover */
+        button:hover {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+
+            transform: translateY(-3px);
+
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Button Click */
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 550px) {
+
+            .main {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width,
+            button {
+                grid-column: span 1;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main">
+
+        <h2>🎓 UPDATE DETAILS OF {{std[1].upper()}}</h2>
+
+        <form action="/student/edit/{{std[0]}}" method="POST">
+
+            <!-- Name -->
+            <div class="form-group full-width">
+                <label for="name">👤 NAME</label>
+                <input type="text"
+                       name="name"
+                       id="name"
+                       placeholder="Enter student name"
+                       required 
+                       value={{std[1]}}>
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+                <label for="age">🎂 AGE</label>
+                <input type="number"
+                       name="age"
+                       id="age"
+                       placeholder="Enter age"
+                       min="1"
+                       required value= {{std[2]}}>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label for="gender">⚧ GENDER</label>
+                <select name="gender" id="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Marks -->
+            <div class="form-group">
+                <label for="marks">📊 MARKS</label>
+                <input type="number"
+                       name="marks"
+                       id="marks"
+                       placeholder="Enter marks"
+                       min="0"
+                       max="100"
+                       required 
+                       value={{std[4]}}>
+            </div>
+
+            <!-- Course -->
+            <div class="form-group">
+                <label for="course">📚 COURSE</label>
+                <input type="text"
+                       name="course"
+                       id="course"
+                       placeholder="Enter course"
+                       required
+                       value={{std[5]}}>
+            </div>
+
+            <!-- Image -->
+            <div class="form-group full-width">
+                <label for="image">🖼️ IMAGE PATH</label>
+                <input type="text"
+                       name="image"
+                       id="image"
+                       placeholder="Enter student image path"
+                       required 
+                       value={{std[6]}}>
+            </div>
+
+            <!-- Attendance -->
+            <div class="form-group full-width">
+                <label for="status">📅 ATTENDANCE STATUS</label>
+                <select name="status" id="status" required>
+                    <option value="">Select Attendance</option>
+                    <option value="1">PRESENT</option>
+                    <option value="0">ABSENT</option>
+                </select>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit">
+                🚀 UPDATE DETAILS
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
